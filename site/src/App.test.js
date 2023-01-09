@@ -10,7 +10,6 @@ test('renders learn react link', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-
 test('models - Configuration save', async () => {
   let o = await DataStore.save(
     new Configuration({
@@ -59,3 +58,4 @@ test('models - Configuration query and delete', async () => {
 
 
 });
+
