@@ -23,11 +23,7 @@ test('models - Configuration save', async () => {
 
 test('models - Configuration query and update', async () => {
 
-    let query_obj = new Configuration({
-		"key": "Lorem ipsum dolor sit amet"
-	})
-
-    const models = await DataStore.query(Configuration);
+    const models = await DataStore.query(Configuration, o => o.key.eq("Lorem ipsum dolor sit amet"));
     console.log(models);
     let obj = models[0]
     expect(obj.value_float).toEqual(123.45)
@@ -44,17 +40,13 @@ test('models - Configuration query and update', async () => {
 
 test('models - Configuration query and delete', async () => {
 
-    let query_obj = new Configuration({
-		"key": "Lorem ipsum dolor sit amet"
-	})
-
-    let models = await DataStore.query(Configuration);
-    console.log(models);
-    let obj = models[0]
-    expect(obj.value_float).toEqual(123.45)
-    await DataStore.delete(obj);
-    models = await DataStore.query(Configuration);
-    expect(models.length).toEqual(0);
+  let models = await DataStore.query(Configuration, o => o.key.eq("Lorem ipsum dolor sit amet"));
+  console.log(models);
+  let obj = models[0]
+  expect(obj.value_float).toEqual(123.45)
+  await DataStore.delete(obj);
+  models = await DataStore.query(Configuration);
+  expect(models.length).toEqual(0);
 
 
 });
